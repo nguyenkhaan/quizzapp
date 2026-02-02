@@ -25,12 +25,13 @@ export default function RootLayout({
    return (
       <html lang="en">
          <body
-            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+            className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
          >
-            <div className="max-w-[1440px] bg-red-500 mx-auto h-screen">
+            <div className="max-w-[1440px] mx-auto h-screen">
                {children}
             </div>
          </body>
       </html>
    );
 }
+//width: full-screen, center, left-1/2 
