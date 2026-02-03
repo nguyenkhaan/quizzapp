@@ -1,5 +1,5 @@
 import SectionLayout from "./SectionLayout"
-import Quiz from "@/components/quiz"
+import QuizCard from "@/components/quiz"
 const AvailableQuiz = () => 
 {
     return (
@@ -7,9 +7,9 @@ const AvailableQuiz = () =>
             <div className="w-full lg:py-0 py-8 h-full gap-12 flex flex-col items-center justify-center">
                 <p className="w-full text-lg text-center">Available Quiz Categories</p>
                 <div className="w-full lg:flex-row flex-col flex items-center justify-between gap-6 lg:gap-4">
-                    <Quiz /> 
-                    <Quiz /> 
-                    <Quiz /> 
+                    <QuizCard /> 
+                    <QuizCard /> 
+                    <QuizCard /> 
                 </div>
             </div>
 

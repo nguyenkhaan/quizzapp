@@ -111,7 +111,7 @@ function LoginForm() {
 const Login = () => {
    return (
       <section className="w-screen relative left-1/2 right-1/2 -translate-x-1/2 h-screen bg-[#f3f6ff]">
-         <div className="w-full h-full  flex items-center flex-col gap-3 justify-center">
+         <div className="w-full h-full flex items-center flex-col gap-3 justify-center">
             <Logo />
             <span>Create Your Account</span>
             <span className="text-gray-600">
