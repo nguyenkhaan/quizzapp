@@ -42,7 +42,7 @@ const Dashboard = () =>
             </div>
             <h2 className="text-base md:text-lg lg:text-xl my-4">Select quiz categories</h2>
             <div className="w-full lg:flex-row flex-col flex items-center justify-between gap-6 lg:gap-4">
-               <QuizCard />
+               <QuizCard questionSet={1} />
                <QuizCard />
                <QuizCard />
             </div>

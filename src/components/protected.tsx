@@ -16,8 +16,7 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
    useEffect(() => {
       if (!hasHydrated) return;
 
-      console.log("Hello");
-      console.log(name);
+      if (!name) router.push('/login')
    }, [name, hasHydrated, router]);
 
    if (!hasHydrated) return null;

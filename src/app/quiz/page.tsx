@@ -1,7 +1,13 @@
-"use client" 
+"use client";
+
 import ProtectedRoute from "@/components/protected";
-import { useState } from "react";
-const sampleQuestions = {
+import useQuiz from "@/zustand/quiz";
+import { useEffect, useState } from "react";
+import { useShallow } from "zustand/shallow";
+import Questions, { QuestionType } from "@/zustand/question";
+import { TOTAL_QUESTIONS } from "@/constants/contant";
+
+const sampleQuestions: QuestionType = {
    id: 10,
    content: "Frontend là gì?",
    A: {
@@ -21,18 +27,19 @@ const sampleQuestions = {
       result: false,
    },
 };
+
 const ChoiceCard = ({
    index = 1,
    result = false,
    content = "",
    isAnswer = false,
-   handleAnswer
+   handleAnswer,
 }: {
    index: number;
    result: boolean;
    content: string;
    isAnswer: boolean;
-   handleAnswer: () => void 
+   handleAnswer: () => void;
 }) => {
    const baseClass =
       "h-30 rounded-lg p-4 items-center justify-start text-base flex gap-2 border border-gray-400 transition-all duration-300";
@@ -41,7 +48,6 @@ const ChoiceCard = ({
       "hover:scale-[1.05] hover:border-[#eeddff] hover:bg-[#eeddff] hover:text-[#9d50f3] cursor-pointer";
 
    const correctClass = "bg-green-100 border-green-500 text-green-700";
-
    const wrongClass = "bg-red-100 border-red-500 text-red-700";
 
    return (
@@ -74,17 +80,46 @@ const ChoiceCard = ({
 };
 
 const TOTAL_STEP = 10;
+
 const Exam = () => {
-   const [step, setStep] = useState(4);
-   const [answer, setAnswer] = useState(false);
-   const handleAnswerClick = () => {
-      setAnswer(true);
-      //neu answer la true thi se tien hanh bat mau
+   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+   const [thisQuestion, setThisQuestion] =
+      useState<QuestionType>(sampleQuestions);
+
+   const handleAnswerClick = (index: number) => {
+      if (selectedIndex !== null) return; // chỉ cho chọn 1 lần
+      setSelectedIndex(index);
    };
+
+   const {
+      currentIndex,
+      myQuestions,
+      hasHydrated,
+      answer: answerQuestion,
+      totalCorrect,
+   } = useQuiz(
+      useShallow((state) => ({
+         currentIndex: state.currentIndex,
+         hasHydrated: state.hasHydrated,
+         answer: state.answer,
+         totalCorrect: state.totalCorrect,
+         myQuestions: state.myQuestions,
+      }))
+   );
+
+   useEffect(() => {
+      if (hasHydrated) {
+         setThisQuestion(
+            Questions.getQuestionByID(myQuestions[currentIndex])
+         );
+         setSelectedIndex(null); // reset khi sang câu mới
+      }
+   }, [currentIndex, hasHydrated]);
+
    return (
       <ProtectedRoute>
          <div className="w-screen relative left-1/2 right-1/2 -translate-x-1/2 h-screen flex items-center justify-center bg-[#f3f6ff]">
-            <div className="w-240  p-6 shadow-xl rounded-xl">
+            <div className="w-240 p-6 shadow-xl rounded-xl">
                <div className="w-full flex items-center justify-between">
                   <span className="font-semibold text-lg">Go back</span>
                   <div className="badge badge-soft badge-primary p-2">
@@ -93,42 +128,43 @@ const Exam = () => {
                </div>
 
                <span className="font-semibold mb-3 block">
-                  Question 6 of 10
+                  Question {currentIndex + 1} of {TOTAL_QUESTIONS}
                </span>
+
                <div className="relative w-full h-2 bg-gray-300 rounded-lg">
                   <div
                      className="top-0 bottom-0 ease-in-out transition-all duration-500 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 rounded-lg absolute"
                      style={{
-                        width: `${(step * 100) / TOTAL_STEP}%`,
+                        width: `${((currentIndex + 1) * 100) / TOTAL_STEP}%`,
                      }}
                   ></div>
                </div>
-               <div className="w-full rounded-xl bg-gray"></div>
-               <p className="text-lg my-5 mb-10 ">
-                  {sampleQuestions.content}
+
+               <p className="text-lg my-5 mb-10">
+                  {thisQuestion?.content}
                </p>
+
                <div className="grid w-full grid-cols-2 gap-5 grid-rows-2">
                   {[
-                     sampleQuestions.A,
-                     sampleQuestions.B,
-                     sampleQuestions.C,
-                     sampleQuestions.D,
-                  ].map((choice, index) => {
-                     return (
-                        <ChoiceCard
-                            key={index}
-                           index={index}
-                           result={choice.result}
-                           content={choice.content}
-                           isAnswer={answer}
-                           handleAnswer={handleAnswerClick}
-                        />
-                     );
-                  })}
+                     thisQuestion.A,
+                     thisQuestion.B,
+                     thisQuestion.C,
+                     thisQuestion.D,
+                  ].map((choice, index) => (
+                     <ChoiceCard
+                        key={index}
+                        index={index}
+                        result={choice.result}
+                        content={choice.content}
+                        isAnswer={selectedIndex === index}
+                        handleAnswer={() => handleAnswerClick(index)}
+                     />
+                  ))}
                </div>
             </div>
          </div>
       </ProtectedRoute>
    );
 };
+
 export default Exam;

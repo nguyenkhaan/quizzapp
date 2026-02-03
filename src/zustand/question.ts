@@ -109,7 +109,7 @@ export default class Questions
     {
         for (const ques of QUESTIONS) if (ques.id === id) 
           return ques 
-        return null  
+        return QUESTIONS[0] //Neu khong co thi mac dinh tra ve index 0 dau tien   
     } 
     static getAnswerByID(id : number , answer : 'A' | 'B' | 'C' | 'D') 
     {
