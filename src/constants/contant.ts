@@ -8,5 +8,6 @@ export const ANSWER_CHOICE = (index : number) => {
         case 2: return 'B' 
         case 3: return 'C' 
         case 4: return 'D' 
+        default : return 'A' 
     }
 }

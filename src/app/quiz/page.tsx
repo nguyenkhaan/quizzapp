@@ -6,7 +6,8 @@ import { useEffect, useState } from "react";
 import { useShallow } from "zustand/shallow";
 import Questions, { QuestionType } from "@/zustand/question";
 import { TOTAL_QUESTIONS } from "@/constants/contant";
-
+import { ANSWER_CHOICE } from "@/constants/contant";
+import Link from "next/link";
 const sampleQuestions: QuestionType = {
    id: 10,
    content: "Frontend là gì?",
@@ -71,7 +72,7 @@ const ChoiceCard = ({
                }
             `}
          >
-            {index + 1}
+            {ANSWER_CHOICE(index + 1)}
          </div>
 
          <p className="lg:text-base text-sm">{content}</p>
@@ -89,14 +90,21 @@ const Exam = () => {
    const handleAnswerClick = (index: number) => {
       if (selectedIndex !== null) return; // chỉ cho chọn 1 lần
       setSelectedIndex(index);
+      //Sau khi chon xong roi thi kiem tra xem chung ta co chon dung dap an hay khong ?
+      //Chay hamd e tra loi cau hoi
+      answerQuestionPlease(currentIndex , ANSWER_CHOICE(index + 1)) 
+      setTimeout(() => {
+            increaseIndex() //Tang len de tien den cau hoi tiep theo 
+      } , 1000)
    };
 
    const {
       currentIndex,
       myQuestions,
       hasHydrated,
-      answer: answerQuestion,
+      answer: answerQuestionPlease,
       totalCorrect,
+      increaseIndex
    } = useQuiz(
       useShallow((state) => ({
          currentIndex: state.currentIndex,
@@ -104,14 +112,13 @@ const Exam = () => {
          answer: state.answer,
          totalCorrect: state.totalCorrect,
          myQuestions: state.myQuestions,
-      }))
+         increaseIndex : state.increaseIndex
+      })),
    );
 
    useEffect(() => {
       if (hasHydrated) {
-         setThisQuestion(
-            Questions.getQuestionByID(myQuestions[currentIndex])
-         );
+         setThisQuestion(Questions.getQuestionByID(myQuestions[currentIndex]));
          setSelectedIndex(null); // reset khi sang câu mới
       }
    }, [currentIndex, hasHydrated]);
@@ -121,7 +128,9 @@ const Exam = () => {
          <div className="w-screen relative left-1/2 right-1/2 -translate-x-1/2 h-screen flex items-center justify-center bg-[#f3f6ff]">
             <div className="w-240 p-6 shadow-xl rounded-xl">
                <div className="w-full flex items-center justify-between">
-                  <span className="font-semibold text-lg">Go back</span>
+                    <Link href={'/dashboard'}>
+                        <span className="font-semibold cursor-pointer text-lg">Go back</span>
+                    </Link>
                   <div className="badge badge-soft badge-primary p-2">
                      Time 24s
                   </div>
@@ -140,9 +149,7 @@ const Exam = () => {
                   ></div>
                </div>
 
-               <p className="text-lg my-5 mb-10">
-                  {thisQuestion?.content}
-               </p>
+               <p className="text-lg my-5 mb-10">{thisQuestion?.content}</p>
 
                <div className="grid w-full grid-cols-2 gap-5 grid-rows-2">
                   {[

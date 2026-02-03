@@ -2,6 +2,8 @@
 import { Lightbulb } from "lucide-react"
 import useQuiz from "@/zustand/quiz"
 import { useShallow } from "zustand/shallow"
+import { useRouter } from "next/navigation"
+import toast from "react-hot-toast"
 const QuizCard = ({
     questionSet =  1   //Ma bo cau hoi 
 } : {
@@ -16,11 +18,16 @@ const QuizCard = ({
             myQuestions : state.myQuestions
         }))
     )
+    const router = useRouter() 
     const handleClick = () => {
-        if (questionSet) 
+        console.log(myQuestions) 
+        if (questionSet && myQuestions.length == 0)   //Sau nay nang cap bo sung them questionSet thi kiem tra xem goi cau hoi dang lam hien tai la gi, neu khong trung thi cho phep ghi de lai goi cau 
+        //Mo rong hon nua: Su dung backend de luu nhieu tien trinh cau hoi 
         {
             loadMyQuestions() //Tien hanh load danh sach ID cua bo cau hoi, luu giu lai 
+            
         }
+        router.push('/quiz')
     }
     return (
         <div className="w-84 md:w-120 lg:w-[464px] text-lg cursor-pointer h-56 lg:h-62 bg-white p-5 flex flex-col items-start px-7 justify-center gap-3 rounded-2xl shadow-lg">
