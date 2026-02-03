@@ -7,10 +7,10 @@ const QuizCard = () =>
                 <Lightbulb className="lg:size-10 size-7" color="white" size={38} strokeWidth={1.75} />
             </div>
             <div>
-                <h2 className="mb-1">IQ Challenge</h2>
-                <span className="text-gray-600 text-base">75 questions available</span>
+                <h2 className="md:text-lg text-base mb-1">IQ Challenge</h2>
+                <span className="text-gray-600 text-sm md:text-base">75 questions available</span>
             </div>
-            <span className="text-blue-600">Start Quiz</span>
+            <span className="text-blue-600 text-base md:text-lg">Start Quiz</span>
         </div>
     )
 }
