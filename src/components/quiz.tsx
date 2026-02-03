@@ -2,9 +2,9 @@ import { Lightbulb } from "lucide-react"
 const Quiz = () => 
 {
     return (
-        <div className="w-[464px] text-lg cursor-pointer h-62 bg-white p-5 flex flex-col items-start px-7 justify-center gap-3 rounded-xl shadow-xl">
-            <div className="p-3 rounded-xl bg-pink-600">
-                <Lightbulb color="white" size={38} strokeWidth={1.75} />
+        <div className="w-84 md:w-120 lg:w-[464px] text-lg cursor-pointer h-56 lg:h-62 bg-white p-5 flex flex-col items-start px-7 justify-center gap-3 rounded-xl shadow-xl">
+            <div className="p-2 lg:p-3 rounded-xl bg-pink-600">
+                <Lightbulb className="lg:size-10 size-7" color="white" size={38} strokeWidth={1.75} />
             </div>
             <div>
                 <h2 className="mb-1">IQ Challenge</h2>

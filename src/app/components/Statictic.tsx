@@ -29,10 +29,10 @@ const CardInformaton: CardType[] = [
 function Card({ title, description, backgroundHex, textHex , number }: CardType & { number : number }) {
    return (
       <div 
-            className={cn("flex items-center gap-3 justify-center flex-col")}
+            className={cn("flex px-4 items-center gap-3 justify-center flex-col")}
         >
          <div 
-            className={cn("rounded-full w-20 h-20 text-xl border-0 font-md flex items-center justify-center")}
+            className={cn("rounded-full w-16 h-16 lg:w-20 lg:h-20 text-xl border-0 font-md flex items-center justify-center")}
             style={{
                 backgroundColor : backgroundHex, 
                 color: textHex
@@ -40,17 +40,17 @@ function Card({ title, description, backgroundHex, textHex , number }: CardType 
             >
             {number}
          </div>
-         <span>{title}</span>
-         <span className="text-gray-600">{description}</span>
+         <span className="lg:text-base md:text-sm text-xs text-center">{title}</span>
+         <span className="text-gray-600 lg:text-base text-sm text-center">{description}</span>
       </div>
    );
 }
 const Statistic = () => {
    return (
-      <SectionLayout customStyle="h-100">
+      <SectionLayout customStyle="lg:h-100 h-80">
          <div className="w-full h-full gap-12 flex flex-col items-center justify-center">
             {/* <p className="w-full text-center text-lg">How It Works</p> */}
-            <div className="w-full  flex items-center justify-between">
+            <div className="w-full flex items-center justify-between">
                {CardInformaton.map((info, index) => {
                   return (
                      <Card

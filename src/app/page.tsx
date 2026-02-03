@@ -8,7 +8,7 @@ const Home = () =>
     return(
         <>
             <Navbar /> 
-                <div className="pt-18">
+                <div className="pt-14 lg:pt-18">
                     <Hero /> 
                     <Statistic /> 
                     <AvailableQuiz /> 

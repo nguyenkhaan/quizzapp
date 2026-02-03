@@ -8,9 +8,9 @@ export function Logo() {
          bg-clip-text text-transparent"
       >
          <div className="p-2 rounded-xl cursor-pointer bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500">
-            <Trophy size={32} color="white" strokeWidth={2.25} />
+            <Trophy className="lg:size-8 size-5" color="white" strokeWidth={2.25} />
          </div>
-         <span className="font-md">QuizWin</span>
+         <span className="font-md text-sm lg:text-base">QuizWin</span>
       </div>
    );
 }
@@ -20,7 +20,8 @@ const Navbar = () => {
          className="
         fixed top-0 left-0 right-0
         z-[99999]
-        h-18
+        h-14
+        lg:h-18
         w-full
         bg-white/70
         shadow-lg

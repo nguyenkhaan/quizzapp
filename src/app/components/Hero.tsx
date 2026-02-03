@@ -3,10 +3,10 @@ import { CircleCheck } from "lucide-react";
 import { Trophy } from "lucide-react";
 export function Card() {
    return (
-      <div className="rounded-2xl flex flex-col gap-3 shadow-xl w-170 h-80 bg-white p-8">
+      <div className="rounded-2xl max-lg:my-5 flex flex-col gap-3 shadow-xl w-80 max-lg:mx-auto md:w-120 lg:w-170 h-80 bg-white p-8">
          <div className="w-full flex-4 rounded-2xl bg-gradient-to-r from-[#3B5BFF] via-[#5B5CFF] p-6 to-[#8A2EFF]">
             <div className="inline-flex flex-col gap-2">
-                <Trophy size={80} color="white" strokeWidth={2.25} />
+                <Trophy className="lg:size-20 size-14" color="white" strokeWidth={2.25} />
                 <span className="text-base text-white">Your lucky ticket</span>
                 <span className="text-base text-yellow-300">TXT12345678</span>
             </div>
@@ -29,14 +29,14 @@ export function Card() {
 
 const Hero = () => {
    return (
-      <SectionLayout customStyle="h-120 py-24 bg-[#f3f6ff]">
-         <div className="w-full h-full flex items-center justify-between">
-            <div className="flex flex-col gap-4 items-start justify-center">
+      <SectionLayout customStyle="lg:h-120 py-20 px-8 lg:py-24 bg-[#f3f6ff]">
+         <div className="w-full h-full max-lg:flex-col lg:flex items-center justify-between">
+            <div className="flex flex-col gap-4 items-center lg:items-start justify-center">
                <button className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-yellow-200 text-yellow-700 font-medium text-base hover:bg-yellow-300 transition">
                   🎉 New Quiz Categories Added!
                </button>
                <span className="text-lg">Play Quiz, Win Tickets, Get Lucky!</span>
-               <span className="block max-w-120 text-lg text-gray-600">
+               <span className="block max-w-120 max-lg:text-center text-lg text-gray-600">
                   Answer quizzes correctly to earn lucky draw tickets. The more
                   you play, the more chances to win amazing prizes!
                </span>
