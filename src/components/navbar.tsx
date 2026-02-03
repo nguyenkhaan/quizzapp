@@ -15,8 +15,7 @@ export function Logo() {
 const Navbar = () => {
    return (
       <div
-         className="
-        fixed top-0 left-0 right-0 z-[99999] h-14 lg:h-18 w-full bg-white/70 shadow-lg backdrop-blur-lg border-b border-white/30"
+         className="fixed top-0 left-0 right-0 z-[99999] h-14 lg:h-18 w-full bg-white/70 shadow-lg backdrop-blur-lg border-b border-white/30"
       >
          <div className="max-w-[1440px] mx-auto h-full px-6 flex items-center justify-between">
             <Logo />

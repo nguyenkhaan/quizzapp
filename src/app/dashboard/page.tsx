@@ -1,7 +1,10 @@
+'use client'
 import Navbar from "@/components/navbar";
 import QuizCard from "@/components/quiz" 
 import { Trophy } from "lucide-react";
 import Table from "./components/table";
+import usePersonal from "@/zustand/personal";
+import ProtectedRoute from "@/components/protected";
 function DashboardStatistic() 
 {
     return (
@@ -15,9 +18,14 @@ function DashboardStatistic()
         </div>
     )
 }
-const Dashboard = () => {
+const Dashboard = () => 
+{
+   const name = usePersonal((state) => state.name) 
+   if (!name) {
+      
+   }
    return (
-      <>
+      <ProtectedRoute>
          <Navbar />
          <section className="w-screen relative left-1/2 right-1/2 -translate-x-1/2 pb-20 bg-[#faf5fc]">
          <div className="max-w-[1440px] mx-auto px-6 pt-14 lg:pt-18">
@@ -47,7 +55,7 @@ const Dashboard = () => {
          </div>
 
          </section>
-      </>
+      </ProtectedRoute>
    );
 };
 export default Dashboard;

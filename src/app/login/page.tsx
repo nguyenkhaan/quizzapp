@@ -3,6 +3,8 @@ import { useState } from "react";
 import { Logo } from "@/components/navbar";
 import Link from "next/link";
 import toast from "react-hot-toast";
+import usePersonal from "@/zustand/personal";
+import { useRouter } from "next/navigation";
 const TOTAL_STEP = 1
 function FullNameInput({
    value,
@@ -60,18 +62,29 @@ function FullNameInput({
 const isFullnameValid = (value: string) => {
    return /^[A-Za-zÀ-ỹ\s]+$/.test(value) && value.trim().length >= 1;
 };
-function LoginForm() {
+function LoginForm() 
+{
+
    const [value, setValue] = useState("");
    const [submited, setSubmitted] = useState(false); //Dang nhap thanh cong
    const [step , setStep] = useState(0) 
+   const setName = usePersonal((state) => state.setName)   //ham dat name vao he thong 
+   const router = useRouter() 
    const onHandleSubmit = (e: any) => {
       e.preventDefault();
       if (!isFullnameValid(value)) return;
       //Submit thanh cong thi cho qua step tiep theo
-      toast.success("Đăng ký tham gia thành công");
+      const toastID = toast.success("Đăng ký tham gia thành công");
       setSubmitted(true) 
       setStep(Math.min(step + 1 , TOTAL_STEP)) 
       //Tien hanh luu du lieu sau do navigate sang trang khac 
+      setName(value) 
+      toast.loading('Đang đăng nhập' , {id : toastID})
+      setTimeout(() => {
+         router.push('/dashboard') 
+         toast.remove(toastID)
+      } ,  3000)   //Delay 3s 
+      
    };
    return (
       <form
