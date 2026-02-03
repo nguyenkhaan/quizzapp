@@ -7,6 +7,7 @@ const Home = () =>
 {   
     return(
         <>
+
             <Navbar /> 
                 <div className="pt-14 lg:pt-18">
                     <Hero /> 
