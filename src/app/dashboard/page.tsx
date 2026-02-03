@@ -21,9 +21,6 @@ function DashboardStatistic()
 const Dashboard = () => 
 {
    const name = usePersonal((state) => state.name) 
-   if (!name) {
-      
-   }
    return (
       <ProtectedRoute>
          <Navbar />
@@ -31,10 +28,10 @@ const Dashboard = () =>
          <div className="max-w-[1440px] mx-auto px-6 pt-14 lg:pt-18">
             <div className="w-full px-3 lg:px-8 rounded-2xl h-42 my-8 flex items-center justify-start gap-2 lg:gap-4 bg-gradient-to-r from-blue-500 via-indigo-500  to-purple-500">
                <div className="border-6 border-[#7987ff] text-2xl lg:text-4xl flex items-center rounded-full text-white justify-center lg:w-24 lg:h-24 w-16 h-16 md:w-20 md:h-20  bg-[#6367ed]">
-                  AN
+                  {name.slice(0 , 2)}
                </div>
                <div className="flex flex-col items-start text-white justify-center gap-2">
-                  <h2 className="font-semibold text-xl md:text-xl lg:text-2xl">Welcome back, An!</h2>
+                  <h2 className="font-semibold text-xl md:text-xl lg:text-2xl">Welcome back, {name}!</h2>
                   <span className=" text-sm lg:text-lg">
                      Ready to play and win more prizes today?
                   </span>

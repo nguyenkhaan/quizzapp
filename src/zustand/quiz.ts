@@ -17,9 +17,9 @@ type QuizType = {
   increaseIndex: () => QuestionType | null
   decreaseIndex: () => QuestionType | null
   setTime: (currentTime: number) => void
-  resetQuiz: () => void
+  resetQuiz: () => void, 
+  hasHydrated: boolean
 }
-
 const useQuiz = create<QuizType>()(
   persist(
     (set, get) => ({
@@ -27,6 +27,7 @@ const useQuiz = create<QuizType>()(
       currentIndex: 0,
       totalCorrect: 0,
       time: 0,
+      hasHydrated: false,
 
       loadMyQuestions: () => {
         const exam = shuffleArray(Questions.attemptQuiz())
@@ -55,7 +56,6 @@ const useQuiz = create<QuizType>()(
 
       increaseIndex: () => {
         const { currentIndex, myQuestions } = get()
-
         if (currentIndex >= myQuestions.length - 1) return null
 
         const newIndex = currentIndex + 1
@@ -68,7 +68,6 @@ const useQuiz = create<QuizType>()(
 
       decreaseIndex: () => {
         const { currentIndex, myQuestions } = get()
-
         if (currentIndex <= 0) return null
 
         const newIndex = currentIndex - 1
@@ -93,15 +92,23 @@ const useQuiz = create<QuizType>()(
       },
     }),
     {
-      name: 'quiz-storage', 
+      name: 'quiz-storage',
+
       partialize: (state) => ({
         myQuestions: state.myQuestions,
         currentIndex: state.currentIndex,
         totalCorrect: state.totalCorrect,
         time: state.time,
       }),
+
+      onRehydrateStorage: () => (state) => {
+        if (state) {
+          state.hasHydrated = true
+        }
+      },
     }
   )
 )
 
 export default useQuiz
+

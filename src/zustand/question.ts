@@ -2,101 +2,105 @@
 export type QuestionType = {
     id : number, 
     content : string, 
-    A: string, B : string, C: string, D : string 
-    answer : string 
+    A: {
+      content: string, 
+      result : boolean 
+    },  
+    B : {
+      content: string, 
+      result: boolean, 
+    }, 
+    C : {
+      content : string, 
+      result: boolean 
+    }
+    D : {
+      content : string, 
+      result: boolean 
+    }
 }
-const QUESTIONS : QuestionType[] = [
+const QUESTIONS: QuestionType[] = [
   {
     id: 1,
     content: 'Bạn là ai?',
-    A: 'Học sinh',
-    B: 'Sinh viên',
-    C: 'Người đi làm',
-    D: 'Khác',
-    answer: 'B'
+    A: { content: 'Học sinh', result: false },
+    B: { content: 'Sinh viên', result: true },
+    C: { content: 'Người đi làm', result: false },
+    D: { content: 'Khác', result: false },
   },
   {
     id: 2,
     content: 'JavaScript là ngôn ngữ gì?',
-    A: 'Ngôn ngữ lập trình',
-    B: 'Ngôn ngữ đánh dấu',
-    C: 'Hệ điều hành',
-    D: 'Cơ sở dữ liệu',
-    answer: 'A'
+    A: { content: 'Ngôn ngữ lập trình', result: true },
+    B: { content: 'Ngôn ngữ đánh dấu', result: false },
+    C: { content: 'Hệ điều hành', result: false },
+    D: { content: 'Cơ sở dữ liệu', result: false },
   },
   {
     id: 3,
     content: 'HTML dùng để làm gì?',
-    A: 'Xử lý logic',
-    B: 'Thiết kế giao diện',
-    C: 'Lưu trữ dữ liệu',
-    D: 'Quản lý server',
-    answer: 'B'
+    A: { content: 'Xử lý logic', result: false },
+    B: { content: 'Thiết kế giao diện', result: true },
+    C: { content: 'Lưu trữ dữ liệu', result: false },
+    D: { content: 'Quản lý server', result: false },
   },
   {
     id: 4,
     content: 'CSS có tác dụng chính là gì?',
-    A: 'Viết backend',
-    B: 'Kết nối database',
-    C: 'Trang trí giao diện',
-    D: 'Chạy thuật toán',
-    answer: 'C'
+    A: { content: 'Viết backend', result: false },
+    B: { content: 'Kết nối database', result: false },
+    C: { content: 'Trang trí giao diện', result: true },
+    D: { content: 'Chạy thuật toán', result: false },
   },
   {
     id: 5,
     content: 'React là gì?',
-    A: 'Framework backend',
-    B: 'Thư viện UI',
-    C: 'Ngôn ngữ lập trình',
-    D: 'Database',
-    answer: 'B'
+    A: { content: 'Framework backend', result: false },
+    B: { content: 'Thư viện UI', result: true },
+    C: { content: 'Ngôn ngữ lập trình', result: false },
+    D: { content: 'Database', result: false },
   },
   {
     id: 6,
     content: 'HTTP là gì?',
-    A: 'Giao thức truyền dữ liệu',
-    B: 'Ngôn ngữ lập trình',
-    C: 'Hệ điều hành',
-    D: 'Trình duyệt',
-    answer: 'A'
+    A: { content: 'Giao thức truyền dữ liệu', result: true },
+    B: { content: 'Ngôn ngữ lập trình', result: false },
+    C: { content: 'Hệ điều hành', result: false },
+    D: { content: 'Trình duyệt', result: false },
   },
   {
     id: 7,
     content: 'LocalStorage dùng để làm gì?',
-    A: 'Lưu data tạm trên server',
-    B: 'Lưu data vĩnh viễn trên trình duyệt',
-    C: 'Lưu cache backend',
-    D: 'Quản lý session server',
-    answer: 'B'
+    A: { content: 'Lưu data tạm trên server', result: false },
+    B: { content: 'Lưu data vĩnh viễn trên trình duyệt', result: true },
+    C: { content: 'Lưu cache backend', result: false },
+    D: { content: 'Quản lý session server', result: false },
   },
   {
     id: 8,
     content: 'API là viết tắt của?',
-    A: 'Application Programming Interface',
-    B: 'Advanced Programming Internet',
-    C: 'Application Process Index',
-    D: 'Applied Program Interface',
-    answer: 'A'
+    A: { content: 'Application Programming Interface', result: true },
+    B: { content: 'Advanced Programming Internet', result: false },
+    C: { content: 'Application Process Index', result: false },
+    D: { content: 'Applied Program Interface', result: false },
   },
   {
     id: 9,
     content: 'Git dùng để làm gì?',
-    A: 'Thiết kế UI',
-    B: 'Quản lý mã nguồn',
-    C: 'Deploy server',
-    D: 'Viết database',
-    answer: 'B'
+    A: { content: 'Thiết kế UI', result: false },
+    B: { content: 'Quản lý mã nguồn', result: true },
+    C: { content: 'Deploy server', result: false },
+    D: { content: 'Viết database', result: false },
   },
   {
     id: 10,
     content: 'Frontend là gì?',
-    A: 'Phần xử lý server',
-    B: 'Phần giao diện người dùng',
-    C: 'Cơ sở dữ liệu',
-    D: 'Hệ điều hành',
-    answer: 'B'
-  }
-];
+    A: { content: 'Phần xử lý server', result: false },
+    B: { content: 'Phần giao diện người dùng', result: true },
+    C: { content: 'Cơ sở dữ liệu', result: false },
+    D: { content: 'Hệ điều hành', result: false },
+  },
+]
 
 
 export default class Questions 
@@ -110,7 +114,12 @@ export default class Questions
     static getAnswerByID(id : number , answer : 'A' | 'B' | 'C' | 'D') 
     {
         for (const ques of QUESTIONS) if (ques.id === id) 
-          return answer === ques.answer
+        {
+            if (answer == 'A' && ques.A.result) return true 
+            if (answer == 'B' && ques.B.result) return true 
+            if (answer == 'C' && ques.C.result) return true 
+            if (answer == 'D' && ques.D.result) return true 
+        }
         return false 
     }
     static attemptQuiz() 
